@@ -1,8 +1,7 @@
 package com.example.belajar.spring.demo.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.belajar.spring.demo.entity.UserName;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HomeController {
@@ -21,5 +20,15 @@ public class HomeController {
     }
 
     // REQUEST PARAM
+    @PostMapping("/helloworld")
+    public String helloWorldPostController(@RequestParam(name = "UserName") String username){
+        return "Hello " +username;
+    }
 
+
+    // REQUEST BODY
+    @PostMapping("/HelloWorldUser")
+    public UserName helloWorldRequestBody(@RequestBody UserName userName){
+        return userName;
+    }
 }
