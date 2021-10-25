@@ -1,10 +1,15 @@
 package com.example.belajar.spring.demo.entity;
 
+import javax.validation.constraints.Email;
+
 public class UserName {
 
     // MEMBUAT ATTRIBUT
     private String name;
     private String address;
+
+    @Email(message = "Invalid Email")
+    private String email;
 
     // MEMBUAT GETTER DAN SETTER
     public String getName(){
@@ -22,4 +27,12 @@ public class UserName {
     public void setAddress(String address){
         this.address = address;
     }
+
+     public String getEmail(){
+        return email;
+     }
+
+     public void setEmail(String email){
+        this.email = email;
+     }
 }
