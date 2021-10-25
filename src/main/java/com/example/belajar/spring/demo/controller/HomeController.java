@@ -1,10 +1,7 @@
 package com.example.belajar.spring.demo.controller;
 
 import com.example.belajar.spring.demo.entity.Todo;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,6 +34,45 @@ public class HomeController {
         HttpEntity<Todo> entity = new HttpEntity<>(newTodo, header);
 
         return restTemplate.exchange("https://jsonplaceholder.typicode.com/todos", HttpMethod.POST, entity, String.class).getBody();
+
+    }
+
+
+    // DELETE
+    @GetMapping("todo/delete")
+    public String deleteTodo(){
+        HttpHeaders header = new HttpHeaders();
+        header.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+
+        //
+        Todo newTodo = new Todo();
+        newTodo.setId((long) 1);
+
+        // MEMBUAT HTTP ENTITY
+        HttpEntity<Todo> entity = new HttpEntity<>(newTodo, header);
+
+        // KEMBALIAN
+        String contoh = restTemplate.exchange("https://jsonplaceholder.typicode.com/todos/" + newTodo.getId(), HttpMethod.DELETE, entity, String.class).getBody();
+        return contoh;
+    }
+
+
+    // PUT
+    @GetMapping("todo/put/{id}")
+    public String putTodo(@PathVariable("id") String id){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+
+        // INSTANSIASI OBJEK TODO
+        Todo newTodo = new Todo();
+        newTodo.setTitle("Arzailants");
+        newTodo.setCompleted(true);
+
+        // MEMBUAT HTTP ENTITY
+        HttpEntity<Todo> entity = new HttpEntity<>(newTodo, headers);
+
+        // KEMBALIAN
+        return restTemplate.exchange("https://jsonplaceholder.typicode.com/todos/" + id, HttpMethod.PUT, entity, String.class).getBody();
 
     }
 
