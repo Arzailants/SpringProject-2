@@ -1,6 +1,9 @@
 package com.example.belajar.spring.demo.controller;
 
+import com.example.belajar.spring.demo.Config;
 import com.example.belajar.spring.demo.entity.Todo;
+import com.example.belajar.spring.demo.entity2.Company;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -101,4 +104,15 @@ public class HomeController {
 //    public UserName helloWorldRequestBody(@Valid @RequestBody UserName userName){
 //        return userName;
 //    }
+
+
+    @GetMapping("/company")
+    public Company home(){
+
+        //
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+        Company company = context.getBean("company", Company.class);
+
+        return company;
+    }
 }
